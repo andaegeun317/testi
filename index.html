@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<!-- Membuka elemen <html> untuk menyusun antarmuka. -->
+<html lang="en" data-theme="dark">
+<!-- Membuka metadata dan sumber daya dokumen. -->
+<head>
+    <!-- Mengatur metadata dokumen untuk browser atau perangkat. -->
+    <meta charset="UTF-8">
+    <!-- Mengatur metadata dokumen untuk browser atau perangkat. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Menentukan judul dokumen pada tab browser. -->
+    <title>INGEN LIBRARY — Biological Archive & Encyclopedia</title>
+    <!-- Menghubungkan dokumen dengan ikon, font, atau stylesheet. -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <!-- Menghubungkan dokumen dengan ikon, font, atau stylesheet. -->
+    <link rel="apple-touch-icon" href="logo.png">
+    <!-- Menerapkan tema tersimpan lebih awal agar halaman tidak sempat tampil dengan tema yang salah. -->
+    <!-- Memuat atau menjalankan JavaScript untuk interaksi halaman. -->
+    <script>
+        // Memeriksa kondisi sebelum memilih cabang proses.
+        if (localStorage.getItem('ingenLibraryTheme') === 'light') {
+            // Menjalankan langkah proses untuk memperbarui data atau antarmuka.
+            document.documentElement.dataset.theme = 'light';
+        // Menutup blok proses yang dimulai sebelumnya.
+        }
+    <!-- Menutup blok JavaScript inline di bagian head. -->
+    </script>
+    <!-- Memuat keluarga font eksternal yang digunakan oleh gaya halaman. -->
+    <!-- Menghubungkan dokumen dengan ikon, font, atau stylesheet. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Menghubungkan dokumen dengan ikon, font, atau stylesheet. -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Menghubungkan dokumen dengan ikon, font, atau stylesheet. -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Memuat aturan tampilan, tata letak, dan responsivitas dari main.css. -->
+    <!-- Menghubungkan dokumen dengan ikon, font, atau stylesheet. -->
+    <link rel="stylesheet" href="main.css">
+</head>
+<!-- Membuka konten dokumen yang ditampilkan kepada pengguna. -->
+<body class="home-mode page-loading">
+    <!-- Layar pemuat awal ditampilkan sampai inisialisasi dan animasi halaman siap. -->
+    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk page-loader is-visible. -->
+    <div id="pageLoader" class="page-loader is-visible" role="status" aria-label="Loading InGen Library" aria-live="polite">
+        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk page-loader-content. -->
+        <div class="page-loader-content">
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk page-loader-emblem. -->
+            <div class="page-loader-emblem">
+                <!-- Menampilkan teks inline atau label antarmuka untuk page-loader-orbit page-loader-orbit-outer. -->
+                <span class="page-loader-orbit page-loader-orbit-outer" aria-hidden="true"></span>
+                <!-- Menampilkan teks inline atau label antarmuka untuk page-loader-orbit page-loader-orbit-inner. -->
+                <span class="page-loader-orbit page-loader-orbit-inner" aria-hidden="true"></span>
+                <!-- Menampilkan gambar  untuk page-loader-logo. -->
+                <img src="logo.png" alt="" class="page-loader-logo">
+            </div>
+        </div>
+    </div>
+
+    <!-- Header memuat identitas situs, navigasi antar tampilan, dan sakelar tema. -->
+    <!-- Membuka bagian kepala halaman untuk logo dan navigasi. -->
+    <header>
+        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk nav-container. -->
+        <div class="nav-container">
+            <!-- Menyediakan tautan menuju bagian atau alamat terkait untuk logo-group. -->
+            <a class="logo-group" onclick="reloadHome()">
+                <!-- Menampilkan gambar  untuk logo-image. -->
+                <img class="logo-image" src="logo.png" alt="Logo InGen Library">
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk logo-text. -->
+                <div class="logo-text">
+                    <!-- Menampilkan judul utama halaman. -->
+                    <h1>INGEN LIBRARY</h1>
+                    <!-- Menampilkan teks inline atau label antarmuka. -->
+                    <span>INGEN BIOLOGICAL ARCHIVE</span>
+                </div>
+            </a>
+            <!-- Membuka daftar tanpa urutan untuk navigasi atau data. -->
+            <ul class="nav-links">
+                <!-- Menambahkan satu butir ke daftar. -->
+                <li><button id="nav-home" class="active" onclick="switchView('home')">Home</button></li>
+                <!-- Menambahkan satu butir ke daftar. -->
+                <li><button id="nav-encyclopedia" onclick="switchView('encyclopedia')">Encyclopedia</button></li>
+                <!-- Menambahkan satu butir ke daftar. -->
+                <li><button id="nav-compare" onclick="switchView('compare')">Compare</button></li>
+                <!-- Menambahkan satu butir ke daftar. -->
+                <li><button id="nav-news" onclick="switchView('news')">News</button></li>
+                <!-- Menambahkan satu butir ke daftar. -->
+                <li>
+                    <!-- Menyediakan tombol untuk aksi pengguna untuk theme-toggle. -->
+                    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode" aria-pressed="false">
+                        <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                        <svg class="theme-icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <!-- Membuka elemen <circle> untuk menyusun antarmuka. -->
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <!-- Mendefinisikan bentuk garis pada ikon vektor. -->
+                            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+                        </svg>
+                        <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                        <svg class="theme-icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <!-- Mendefinisikan bentuk garis pada ikon vektor. -->
+                            <path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z"></path>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Konten utama berisi tampilan homepage, direktori, perbandingan, berita, dan detail. -->
+    <!-- Membuka area konten utama halaman. -->
+    <main>
+
+        <!-- Homepage: slideshow specimen, pengantar arsip, statistik, dan kartu media. -->
+        <!-- Membuka bagian konten  untuk view-section active. -->
+        <section id="view-home" class="view-section active">
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk dino-carousel. -->
+            <div class="dino-carousel" id="dinoCarousel" aria-label="Mesozoic Wonders dinosaur photo slideshow">
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk dino-carousel-title. -->
+                <div class="dino-carousel-title">
+                    <!-- Menampilkan judul bagian atau artikel. -->
+                    <h2 aria-label="Mesozoic Wonders">Mesozoic Wonders</h2>
+                </div>
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk dino-carousel-slides. -->
+                <div class="dino-carousel-slides" id="dinoCarouselSlides" aria-live="off"></div>
+                <!-- Menyediakan tautan menuju bagian atau alamat terkait untuk dino-scroll-cue. -->
+                <a class="dino-scroll-cue" href="#homeIntro">
+                    Scroll down
+                    <!-- Menampilkan teks inline atau label antarmuka untuk scroll-cue-arrow. -->
+                    <span class="scroll-cue-arrow" aria-hidden="true">
+                        <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                        <svg class="scroll-cue-arrow-current" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14m-7-7 7 7 7-7"/></svg>
+                        <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                        <svg class="scroll-cue-arrow-next" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14m-7-7 7 7 7-7"/></svg>
+                    </span>
+                </a>
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk dino-carousel-controls. -->
+                <div class="dino-carousel-controls">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk dino-carousel-dots. -->
+                    <div class="dino-carousel-dots" id="dinoCarouselDots"></div>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk dino-carousel-arrows. -->
+                    <div class="dino-carousel-arrows">
+                        <!-- Menyediakan tombol untuk aksi pengguna. -->
+                        <button type="button" aria-label="Previous photo" onclick="changeDinoSlide(-1)">
+                            <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
+                        </button>
+                        <!-- Menyediakan tombol untuk aksi pengguna. -->
+                        <button type="button" aria-label="Next photo" onclick="changeDinoSlide(1)">
+                            <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ringkasan koleksi serta tombol menuju katalog lengkap. -->
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk hero. -->
+            <div class="hero" id="homeIntro">
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk hero-content. -->
+                <div class="hero-content">
+                    <!-- Menampilkan judul bagian atau artikel. -->
+                    <h2>The Definitive Biological Records of Isla Nublar & Sorna</h2>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>Explore field notes, anatomical metrics, and behavioral records for species featured across the Jurassic films, including Jurassic World: Rebirth, Camp Cretaceous, and Jurassic World Evolution.</p>
+                    <!-- Menyediakan tombol untuk aksi pengguna untuk btn-primary. -->
+                    <button class="btn-primary" onclick="switchView('encyclopedia')">
+                        Explore Full Encyclopedia 
+                        <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+                    </button>
+                </div>
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk hero-stats. -->
+                <div class="hero-stats">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk stat-item. -->
+                    <div class="stat-item">
+                    <!-- Menampilkan subjudul bagian dengan ID catalogedSpecimenCount. -->
+                    <h3 id="catalogedSpecimenCount">45</h3>
+                        <!-- Menampilkan paragraf keterangan. -->
+                        <p>Cataloged Specimens</p>
+                    </div>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk stat-item. -->
+                    <div class="stat-item">
+                        <!-- Menampilkan subjudul bagian dengan ID mediaArchiveCount. -->
+                        <h3 id="mediaArchiveCount">9</h3>
+                        <!-- Menampilkan paragraf keterangan. -->
+                        <p>Media Archives</p>
+                    </div>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk stat-item. -->
+                    <div class="stat-item">
+                        <!-- Menampilkan subjudul bagian. -->
+                        <h3>100%</h3>
+                        <!-- Menampilkan paragraf keterangan. -->
+                        <p>DNA Complete</p>
+                    </div>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk stat-item. -->
+                    <div class="stat-item">
+                        <!-- Menampilkan subjudul bagian. -->
+                        <h3>VARIED</h3>
+                        <!-- Menampilkan paragraf keterangan. -->
+                        <p>Containment by Era</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kartu franchise untuk membuka direktori dengan filter media terkait. -->
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk section-header. -->
+            <div class="section-header">
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka. -->
+                <div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Media Archives</span>
+                    <!-- Menampilkan subjudul bagian. -->
+                    <h3>Browse by Franchise Media</h3>
+                </div>
+            </div>
+
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-grid. -->
+            <div class="movie-grid">
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card. -->
+                <div class="movie-card" data-movie="Jurassic Park" onclick="filterByMovie('Jurassic Park')">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card-image. -->
+                    <div class="movie-card-image">
+                        <!-- Menampilkan gambar . -->
+                        <img src="jurassic-park.png" alt="Jurassic Park (1993)">
+                    </div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Released 1993</span>
+                    <!-- Menampilkan judul kartu atau panel. -->
+                    <h4>Jurassic Park</h4>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>The dawn of genetic recreation. Discover the original specimens engineered by InGen in the Costa Rican archipelago.</p>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-footer. -->
+                    <div class="movie-footer">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk movie-specimen-count. -->
+                        <span class="movie-specimen-count">Specimens</span>
+                        <!-- Menampilkan teks inline atau label antarmuka. -->
+                        <span>View Records &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card. -->
+                <div class="movie-card" data-movie="The Lost World: Jurassic Park" onclick="filterByMovie('The Lost World: Jurassic Park')">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card-image. -->
+                    <div class="movie-card-image">
+                        <!-- Menampilkan gambar . -->
+                        <img src="the-lost-world.png" alt="The Lost World: Jurassic Park (1997)">
+                    </div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Released 1997</span>
+                    <!-- Menampilkan judul kartu atau panel. -->
+                    <h4>The Lost World: Jurassic Park</h4>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>Site B (Isla Sorna) ecological survey documenting unchecked breeding populations in the wild.</p>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-footer. -->
+                    <div class="movie-footer">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk movie-specimen-count. -->
+                        <span class="movie-specimen-count">Specimens</span>
+                        <!-- Menampilkan teks inline atau label antarmuka. -->
+                        <span>View Records &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card. -->
+                <div class="movie-card" data-movie="Jurassic Park III" onclick="filterByMovie('Jurassic Park III')">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card-image. -->
+                    <div class="movie-card-image">
+                        <!-- Menampilkan gambar . -->
+                        <img src="jurassic-park-3.png" alt="Jurassic Park III (2001)">
+                    </div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Released 2001</span>
+                    <!-- Menampilkan judul kartu atau panel. -->
+                    <h4>Jurassic Park III</h4>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>Deep reconnaissance of Isla Sorna revealing advanced avian-dinosaur hybrids and apex predators.</p>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-footer. -->
+                    <div class="movie-footer">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk movie-specimen-count. -->
+                        <span class="movie-specimen-count">Specimens</span>
+                        <!-- Menampilkan teks inline atau label antarmuka. -->
+                        <span>View Records &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card. -->
+                <div class="movie-card" data-movie="Jurassic World" onclick="filterByMovie('Jurassic World')">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card-image. -->
+                    <div class="movie-card-image">
+                        <!-- Menampilkan gambar . -->
+                        <img src="jurassic-world.png" alt="Jurassic World (2015)">
+                    </div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Released 2015</span>
+                    <!-- Menampilkan judul kartu atau panel. -->
+                    <h4>Jurassic World</h4>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>The fully operational theme park on Isla Nublar introducing corporate-sponsored genetic hybrid engineering.</p>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-footer. -->
+                    <div class="movie-footer">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk movie-specimen-count. -->
+                        <span class="movie-specimen-count">Specimens</span>
+                        <!-- Menampilkan teks inline atau label antarmuka. -->
+                        <span>View Records &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card. -->
+                <div class="movie-card" data-movie="Jurassic World: Fallen Kingdom" onclick="filterByMovie('Jurassic World: Fallen Kingdom')">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card-image. -->
+                    <div class="movie-card-image">
+                        <!-- Menampilkan gambar . -->
+                        <img src="jurassic-world-fallen-kingdom.png" alt="Jurassic World: Fallen Kingdom (2018)">
+                    </div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Released 2018</span>
+                    <!-- Menampilkan judul kartu atau panel. -->
+                    <h4>Jurassic World: Fallen Kingdom</h4>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>Volcanic evacuation and illicit black-market genetic auctions featuring underground bio-weapon prototypes.</p>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-footer. -->
+                    <div class="movie-footer">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk movie-specimen-count. -->
+                        <span class="movie-specimen-count">Specimens</span>
+                        <!-- Menampilkan teks inline atau label antarmuka. -->
+                        <span>View Records &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card. -->
+                <div class="movie-card" data-movie="Jurassic World: Dominion" onclick="filterByMovie('Jurassic World: Dominion')">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card-image. -->
+                    <div class="movie-card-image">
+                        <!-- Menampilkan gambar . -->
+                        <img src="jurassic-world-dominion.png" alt="Jurassic World: Dominion (2022)">
+                    </div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Released 2022</span>
+                    <!-- Menampilkan judul kartu atau panel. -->
+                    <h4>Jurassic World: Dominion</h4>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>Post-containment era. Dinosaurs coexisting across global ecosystems alongside human civilization.</p>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-footer. -->
+                    <div class="movie-footer">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk movie-specimen-count. -->
+                        <span class="movie-specimen-count">Specimens</span>
+                        <!-- Menampilkan teks inline atau label antarmuka. -->
+                        <span>View Records &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card. -->
+                <div class="movie-card" data-movie="Jurassic World: Rebirth" onclick="filterByMovie('Jurassic World: Rebirth')">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card-image. -->
+                    <div class="movie-card-image">
+                        <!-- Menampilkan gambar . -->
+                        <img src="jurassic-world-rebirth.png" alt="Jurassic World: Rebirth (2025)">
+                    </div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Released 2025</span>
+                    <!-- Menampilkan judul kartu atau panel. -->
+                    <h4>Jurassic World: Rebirth</h4>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>A new expedition investigates prehistoric animals on an isolated equatorial island, including never-before-cataloged specimens.</p>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-footer. -->
+                    <div class="movie-footer">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk movie-specimen-count. -->
+                        <span class="movie-specimen-count">Specimens</span>
+                        <!-- Menampilkan teks inline atau label antarmuka. -->
+                        <span>View Records &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card. -->
+                <div class="movie-card" data-movie="Camp Cretaceous" onclick="filterByMovie('Camp Cretaceous')">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card-image. -->
+                    <div class="movie-card-image">
+                        <!-- Menampilkan gambar . -->
+                        <img src="jurassic-world-camp.png" alt="Jurassic World: Camp Cretaceous">
+                    </div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Series 2020—2022</span>
+                    <!-- Menampilkan judul kartu atau panel. -->
+                    <h4>Camp Cretaceous</h4>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>The animated survival chronicles of six campers trapped across Isla Nublar during the Jurassic World era.</p>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-footer. -->
+                    <div class="movie-footer">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk movie-specimen-count. -->
+                        <span class="movie-specimen-count">Specimens</span>
+                        <!-- Menampilkan teks inline atau label antarmuka. -->
+                        <span>View Records &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card. -->
+                <div class="movie-card" data-movie="Jurassic World Evolution" onclick="filterByMovie('Jurassic World Evolution')">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-card-image. -->
+                    <div class="movie-card-image">
+                        <!-- Menampilkan gambar . -->
+                        <img src="jurrasic-world-evolution.png" alt="Jurassic World Evolution">
+                    </div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Game</span>
+                    <!-- Menampilkan judul kartu atau panel. -->
+                    <h4>Jurassic World Evolution</h4>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>The expanded park-management archive featuring additional species and prehistoric life from across the franchise.</p>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk movie-footer. -->
+                    <div class="movie-footer">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk movie-specimen-count. -->
+                        <span class="movie-specimen-count">Specimens</span>
+                        <!-- Menampilkan teks inline atau label antarmuka. -->
+                        <span>View Records &rarr;</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Direktori menyediakan pencarian, filter, pengurutan, dan grid specimen dinamis. -->
+        <!-- Membuka bagian konten  untuk view-section. -->
+        <section id="view-encyclopedia" class="view-section">
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk section-header directory-section-header. -->
+            <div class="section-header directory-section-header">
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka. -->
+                <div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Biological Index</span>
+                    <!-- Menampilkan subjudul bagian. -->
+                    <h3>Specimen Directory</h3>
+                </div>
+            </div>
+
+            <!-- Kontrol untuk mencari dan menyaring specimen berdasarkan media, diet, atau nama. -->
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk controls-bar. -->
+            <div class="controls-bar">
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk search-box. -->
+                <div class="search-box">
+                    <!-- Menampilkan teks inline atau label antarmuka untuk search-icon. -->
+                    <span class="search-icon">
+                        <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    </span>
+                    <!-- Menyediakan kolom masukan pengguna dengan ID searchInput. -->
+                    <input type="search" id="searchInput" aria-label="Search dinosaurs by name or species" placeholder="Search by name or species..." oninput="filterDinosaurs()">
+                </div>
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk filter-group. -->
+                <div class="filter-group">
+                    <!-- Menyediakan daftar pilihan pengguna dengan ID movieFilter. -->
+                    <select id="movieFilter" onchange="filterDinosaurs()">
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="">All Films, Series &amp; Games</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Jurassic Park">Jurassic Park (1993)</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="The Lost World: Jurassic Park">The Lost World: Jurassic Park (1997)</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Jurassic Park III">Jurassic Park III (2001)</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Jurassic World">Jurassic World (2015)</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Jurassic World: Fallen Kingdom">Jurassic World: Fallen Kingdom (2018)</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Jurassic World: Dominion">Jurassic World: Dominion (2022)</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Jurassic World: Rebirth">Jurassic World: Rebirth (2025)</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Camp Cretaceous">Camp Cretaceous (Animated Series)</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Jurassic World Evolution">Jurassic World Evolution</option>
+                    </select>
+                    <!-- Menyediakan daftar pilihan pengguna dengan ID dietFilter. -->
+                    <select id="dietFilter" onchange="filterDinosaurs()">
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="">All Diets &amp; Types</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Carnivore">Carnivore</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Herbivore">Herbivore</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Omnivore">Omnivore</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Piscivore">Piscivore</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
+                    <!-- Menyediakan daftar pilihan pengguna dengan ID sortOrder. -->
+                    <select id="sortOrder" aria-label="Sort specimens" onchange="filterDinosaurs()">
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="">Default order</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="asc">Sort A–Z</option>
+                        <!-- Menambahkan satu pilihan pada daftar pilihan. -->
+                        <option value="desc">Sort Z–A</option>
+                    </select>
+                    <!-- Menyediakan tombol untuk aksi pengguna untuk filter-reset-button. -->
+                    <button type="button" id="resetFilters" class="filter-reset-button" onclick="resetDinosaursFilter()" aria-label="Reset filters and sorting" title="Reset filters and sorting">
+                        <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <!-- Mendefinisikan bentuk garis pada ikon vektor. -->
+                            <path d="M3 12a9 9 0 0 1 15.36-6.36L21 8"></path>
+                            <!-- Mendefinisikan bentuk garis pada ikon vektor. -->
+                            <path d="M21 3v5h-5"></path>
+                            <!-- Mendefinisikan bentuk garis pada ikon vektor. -->
+                            <path d="M21 12a9 9 0 0 1-15.36 6.36L3 16"></path>
+                            <!-- Mendefinisikan bentuk garis pada ikon vektor. -->
+                            <path d="M3 21v-5h5"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kartu hasil direktori dibuat oleh renderDirectory() di script.js. -->
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk dino-grid. -->
+            <div class="dino-grid" id="dinoGrid">
+                <!-- Kartu specimen dimasukkan ke area ini sesuai hasil pencarian dan filter. -->
+            </div>
+        </section>
+
+        <!-- Tampilan perbandingan mengisi pilihan dan hasilnya melalui script.js. -->
+        <!-- Membuka bagian konten  untuk view-section. -->
+        <section id="view-compare" class="view-section">
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk section-header compare-header. -->
+            <div class="section-header compare-header">
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka. -->
+                <div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">Genetic Lab</span>
+                    <!-- Menampilkan subjudul bagian. -->
+                    <h3>Specimen Comparison</h3>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>Choose two archived specimens or generate a random pair.</p>
+                </div>
+            </div>
+
+            <!-- Pilih dua specimen atau minta aplikasi memilih pasangan secara acak. -->
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk compare-controls. -->
+            <div class="compare-controls">
+                <!-- Memberi keterangan pada kontrol formulir. -->
+                <label for="compareSpecimenA">
+                    Specimen A
+                    <!-- Menyediakan daftar pilihan pengguna dengan ID compareSpecimenA. -->
+                    <select id="compareSpecimenA"></select>
+                </label>
+                <!-- Menyediakan tombol untuk aksi pengguna untuk btn-primary. -->
+                <button id="compareRandom" type="button" class="btn-primary">Random Pair</button>
+                <!-- Memberi keterangan pada kontrol formulir. -->
+                <label for="compareSpecimenB">
+                    Specimen B
+                    <!-- Menyediakan daftar pilihan pengguna dengan ID compareSpecimenB. -->
+                    <select id="compareSpecimenB"></select>
+                </label>
+            </div>
+            <!-- Kartu perbandingan dibuat ulang setiap kali pilihan berubah. -->
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk compare-results. -->
+            <div id="compareResults" class="compare-results" aria-live="polite"></div>
+        </section>
+
+        <!-- Daftar berita franchise; setiap kartu membuka artikel pada dialog di bawah. -->
+        <!-- Membuka bagian konten  untuk view-section. -->
+        <section id="view-news" class="view-section">
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk section-header news-section-header. -->
+            <div class="section-header news-section-header">
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka. -->
+                <div>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk movie-badge. -->
+                    <span class="movie-badge">InGen Field Reports</span>
+                    <!-- Menampilkan subjudul bagian. -->
+                    <h3>News &amp; Character Files</h3>
+                    <!-- Menampilkan paragraf keterangan. -->
+                    <p>Stories, people, and discoveries from the Jurassic films. These are fictional franchise reports, not real-world news. Each story has its own photo slot for images you add later.</p>
+                </div>
+            </div>
+
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-grid. -->
+            <div class="news-grid" id="newsGrid">
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="henry-wu">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="henry-wu.webp" alt="Dr. Henry Wu" data-image-slot="henry-wu" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Character dossier · InGen</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Who is Dr. Henry Wu?</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">The geneticist whose work helped bring InGen's dinosaurs—and its most ambitious hybrids—to life.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic Park · Jurassic World · Fallen Kingdom · Dominion</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="jurassic-park-incident">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="breakout-scene.jpeg" alt="Isla Nublar during the 1993 park incident" data-image-slot="nublar" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Incident report · 1993</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>The night Jurassic Park lost containment</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">A tropical storm and a security failure turn the island's grand opening into an evacuation.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic Park (1993)</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="isla-sorna">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="isla-sorna.jpg" alt="Isla Sorna, also known as Site B" data-image-slot="sorna" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Site B briefing · Isla Sorna</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Isla Sorna: life beyond the fences</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">Site B's free-roaming population reveals what happened after the island's facilities were left behind.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: The Lost World · Jurassic Park III</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="indominus-breakout">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="indominus-breakout.jpeg" alt="Indominus rex breakout" data-image-slot="indominus" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Containment alert · Isla Nublar</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>The Indominus breakout</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">A newly engineered attraction escapes its enclosure and puts Jurassic World into crisis.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic World (2015)</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="fallen-kingdom">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="evacuation-scene.webp" alt="Mount Sibo eruption on Isla Nublar" data-image-slot="volcano" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Evacuation report · Mount Sibo</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Fallen Kingdom: the island evacuation</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">A volcanic eruption forces a rescue mission and moves dinosaurs from Isla Nublar to the mainland.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic World: Fallen Kingdom (2018)</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="indoraptor">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="indoraptor-scene.webp" alt="Indoraptor" data-image-slot="indoraptor" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Genetics dossier · Lockwood estate</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Inside the Indoraptor program</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">A private auction reveals the next step in the franchise's fictional hybrid experiments.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic World: Fallen Kingdom (2018)</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="maisie-lockwood">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="maisie-lockwood.jpg" alt="Maisie Lockwood" data-image-slot="maisie" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Character dossier · Lockwood estate</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Who is Maisie Lockwood?</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">A family secret changes what the films say about cloning—and about the value of life.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Fallen Kingdom · Dominion</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="owen-blue">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="owen-blue.jpeg" alt="Owen Grady and Blue" data-image-slot="owen-blue" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Field profile · Raptor program</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Owen Grady and Blue</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">A trainer and a Velociraptor form an unusual bond that continues across the films.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic World · Fallen Kingdom · Dominion</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="biosyn-locusts">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="locust-scene.webp" alt="Biosyn valley" data-image-slot="biosyn" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Global investigation · Biosyn</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>The locust crisis at Biosyn</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">A new genetic threat points back to the same company promising to protect prehistoric life.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic World: Dominion (2022)</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="claire-dearing">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="claire.jpg" alt="Claire Dearing" data-image-slot="claire" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Character dossier · Dinosaur Protection Group</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Claire Dearing: from park manager to advocate</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">Her role changes as the story moves from running a theme park to protecting animals in the wild.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic World · Fallen Kingdom · Dominion</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="john-hammond">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="john-hammond.avif" alt="John Hammond" data-image-slot="hammond" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Founder profile · Jurassic Park</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>John Hammond and the dream of a dinosaur park</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">The founder's vision brings prehistoric animals back to life, but the films question the cost of turning that vision into an attraction.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic Park · The Lost World</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="ian-malcolm">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="ian-malcolm.jpg" alt="Dr. Ian Malcolm" data-image-slot="malcolm" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Expert profile · Chaos theory</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Dr. Ian Malcolm: the warning before the disaster</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">The mathematician invited to assess the park becomes one of the franchise's clearest voices about risk and control.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic Park · The Lost World · Dominion</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="alan-grant">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="allan-grant-comeback.webp" alt="Dr. Alan Grant" data-image-slot="grant" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Expert profile · Paleontology</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Dr. Alan Grant's return to the islands</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">From an unexpected tour of Jurassic Park to a rescue mission on Site B, Grant keeps being pulled into the living world he studies.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic Park · Jurassic Park III · Dominion</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="ellie-sattler">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="ellie-satler.avif" alt="Dr. Ellie Sattler" data-image-slot="sattler" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Expert profile · Paleobotany</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Dr. Ellie Sattler follows the evidence</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">A paleobotanist's observations help expose what the park's visitors are not being told.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic Park · Dominion</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="dennis-nedry">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="dennis-nerdy.jpeg" alt="Dennis Nedry" data-image-slot="nedry" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Incident file · Park systems</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Dennis Nedry and the stolen embryos</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">A planned theft disables the security network and sets the Jurassic Park disaster in motion.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic Park (1993)</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="robert-muldoon">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="robert-muldoon.webp" alt="Robert Muldoon" data-image-slot="muldoon" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Field profile · Park game warden</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Robert Muldoon knew the raptors were dangerous</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">The park's game warden understands the animals' behavior better than the systems built to contain them.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic Park (1993)</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="simon-masrani">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="simon.jpg" alt="Simon Masrani" data-image-slot="masrani" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Executive profile · Masrani Global</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Simon Masrani's Jurassic World</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">The park's owner wants to honor Hammond's dream while chasing a new attraction that grows beyond his control.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic World (2015)</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="vic-hoskins">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="vic-hoskind.webp" alt="Vic Hoskins" data-image-slot="hoskins" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Security briefing · InGen</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Vic Hoskins and the raptor weapon plan</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">InGen Security sees the raptor program as military potential; Owen sees animals that cannot be reduced to weapons.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic World (2015)</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="scorpios-rex">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="scorpis-rex-breakout.jpg" alt="Scorpios rex, experiment E750" data-image-slot="scorpios" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Series incident · Camp Cretaceous</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>E750: the Scorpios Rex outbreak</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">The campers uncover an abandoned hybrid experiment hidden beneath Isla Nublar.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Series record: Jurassic World: Camp Cretaceous</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="camp-cretaceous">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="camp-creataceous-kids.avif" alt="The six Camp Cretaceous campers" data-image-slot="camp" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Survival report · Isla Nublar</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Six campers stranded during the park's collapse</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">Darius, Brooklynn, Kenji, Yaz, Sammy, and Ben must navigate an island after the guests and staff have evacuated.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Series record: Jurassic World: Camp Cretaceous</span>
+                    </div>
+                </article>
+
+                <!-- Membuka konten mandiri seperti kartu atau artikel untuk news-card. -->
+                <article class="news-card" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="newsStoryDialog" data-news-story="rebirth-expedition">
+                    <!-- Menampilkan gambar  untuk news-card-image news-card-photo. -->
+                    <img class="news-card-image news-card-photo" src="rebirth.avif" alt="Jurassic World Rebirth expedition" data-image-slot="rebirth" loading="lazy">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk news-card-content. -->
+                    <div class="news-card-content">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-category. -->
+                        <span class="news-category">Expedition briefing · 5 years after Dominion</span>
+                        <!-- Menampilkan judul kartu atau panel. -->
+                        <h4>Rebirth: mission to the forbidden island</h4>
+                        <!-- Menampilkan paragraf keterangan untuk news-card-summary. -->
+                        <p class="news-card-summary">A team seeks genetic material from three colossal species, but the island's secrets turn the mission into a fight to survive.</p>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-open-prompt. -->
+                        <span class="news-open-prompt" aria-hidden="true">Read the full story <span>→</span></span>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk news-source. -->
+                        <span class="news-source">Film record: Jurassic World Rebirth (2025)</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Dialog menerima isi dari template artikel yang sesuai dengan kartu terpilih. -->
+        <!-- Membuka wadah dialog untuk konten berita. -->
+        <dialog id="newsStoryDialog" class="news-story-dialog" aria-labelledby="newsStoryDialogTitle">
+            <!-- Menyediakan tombol untuk aksi pengguna untuk news-story-close. -->
+            <button type="button" class="news-story-close" aria-label="Close story">×</button>
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka dengan ID newsStoryDialogContent. -->
+            <div id="newsStoryDialogContent"></div>
+        </dialog>
+
+        <!-- Template-template artikel disalin ke dialog oleh initializeNewsStories(). -->
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-henry-wu">
+            <article class="news-story-article">
+                <span class="news-category">Character dossier · InGen</span>
+                <h2 id="newsStoryDialogTitle">Who is Dr. Henry Wu?</h2>
+                <p class="news-story-lead">The geneticist behind InGen's dinosaur program becomes one of the franchise's most consequential figures.</p>
+                <img class="news-story-photo-slot" src="henry-wu.webp" alt="Dr. Henry Wu" data-image-slot="henry-wu" loading="lazy">
+                <div class="news-story-body">
+                    <p>Dr. Henry Wu is a geneticist working for InGen. In Jurassic Park, he explains how the company reconstructs dinosaur DNA and breeds animals for its planned park on Isla Nublar. The film introduces him as part of the scientific team that turns the park's genetic research into living attractions.</p>
+                    <p>By the time of Jurassic World, Wu has become a senior figure in the cloning program. The park's new headline attraction, the Indominus rex, is a hybrid assembled from several genetic sources. The animal's full makeup is not shared with the park's visitors—or with every member of its operations team—which becomes a major part of the ensuing crisis.</p>
+                    <p>Fallen Kingdom connects Wu to the Indoraptor project, a privately commissioned hybrid developed at the Lockwood estate. Dominion places him at Biosyn, where his work is linked to the company's giant locust program. When the locusts threaten global crops, Wu helps reveal the genetic link and works with the protagonists on a way to stop the outbreak.</p>
+                    <p>Wu is not simply a villain or a hero: the films show a scientist whose ambition and choices repeatedly have consequences beyond the laboratory. His changing decisions in Dominion give his story a measure of responsibility and attempted repair.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic Park · Jurassic World · Fallen Kingdom · Dominion</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-jurassic-park-incident">
+            <article class="news-story-article">
+                <span class="news-category">Incident report · Isla Nublar, 1993</span>
+                <h2 id="newsStoryDialogTitle">The night Jurassic Park lost containment</h2>
+                <p class="news-story-lead">The park's first major failure begins with a theft, a storm, and a chain of systems that were never as independent as they appeared.</p>
+                <img class="news-story-photo-slot" src="breakout-scene.jpeg" alt="Isla Nublar during the 1993 park incident" data-image-slot="nublar" loading="lazy">
+                <div class="news-story-body">
+                    <p>Jurassic Park is being prepared for a limited visitor tour when computer programmer Dennis Nedry attempts to steal frozen embryos for a rival company. To cover his escape, he disables parts of the park's security network. At the same time, a tropical storm disrupts travel and makes the island harder to manage.</p>
+                    <p>With the security systems offline, several fences lose power. The Tyrannosaurus paddock becomes the most immediate danger: the tour vehicles are stranded beside the enclosure, and the animals are no longer contained. Staff members and visitors must navigate the island without reliable communications or a clear picture of which systems still work.</p>
+                    <p>The crisis spreads as the group tries to reach the visitor center and restart the park's power. Velociraptors later escape their holding area, adding a second threat inside the facility. The surviving visitors eventually reach help, but the planned opening is over and the park is abandoned.</p>
+                    <p>The film's central warning is not that every system fails at once; it is that a high-risk attraction depends on people, procedures, and safeguards working together. When one critical link is deliberately removed, the consequences reach far beyond the computer room.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic Park (1993)</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-isla-sorna">
+            <article class="news-story-article">
+                <span class="news-category">Site B briefing · Isla Sorna</span>
+                <h2 id="newsStoryDialogTitle">Isla Sorna: life beyond the fences</h2>
+                <p class="news-story-lead">The films' second major island is a research and production site, not another version of the visitor park on Isla Nublar.</p>
+                <img class="news-story-photo-slot" src="isla-sorna.jpg" alt="Isla Sorna, also known as Site B" data-image-slot="sorna" loading="lazy">
+                <div class="news-story-body">
+                    <p>Isla Sorna is also known as Site B. In the franchise's backstory, InGen used the island to raise cloned animals before moving selected dinosaurs to Isla Nublar. When its facilities were abandoned, the animals were left to live across the island rather than inside a finished theme park.</p>
+                    <p>The Lost World: Jurassic Park follows a scientific team sent to document the population and another group hoping to capture animals for a mainland attraction. Their goals collide in the island's open environment, where herds, predators, and human camps all occupy the same landscape.</p>
+                    <p>Jurassic Park III returns to Sorna through a rescue mission for a missing teenager. The expedition encounters the Spinosaurus and additional dinosaur species, and the island again proves difficult to cross or control. The film does not present Site B as a safe reserve: it is a place shaped by abandoned InGen work and unpredictable wildlife.</p>
+                    <p>Keeping Isla Sorna distinct from Isla Nublar helps explain the franchise's geography. Nublar is the location of Jurassic Park and Jurassic World; Sorna is the separate Site B setting central to The Lost World and Jurassic Park III.</p>
+                </div>
+                <p class="news-source">Film record: The Lost World: Jurassic Park · Jurassic Park III</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-indominus-breakout">
+            <article class="news-story-article">
+                <span class="news-category">Containment alert · Jurassic World</span>
+                <h2 id="newsStoryDialogTitle">The Indominus breakout</h2>
+                <p class="news-story-lead">A hybrid created to attract visitors becomes the central danger facing the park that designed it.</p>
+                <img class="news-story-photo-slot" src="indominus-breakout.jpeg" alt="Indominus rex breakout" data-image-slot="indominus" loading="lazy">
+                <div class="news-story-body">
+                    <p>Jurassic World opens on Isla Nublar years after the original park's collapse. To keep public interest growing, its operators introduce the Indominus rex, an animal engineered from multiple genetic sources. Its abilities and behavior are not fully understood by the people responsible for its enclosure.</p>
+                    <p>When the Indominus appears to have escaped, a containment team enters the paddock and discovers that the animal can camouflage itself and conceal its heat signature. The escape turns the park's security response into a dangerous search across the island.</p>
+                    <p>As the Indominus moves toward the visitor areas, the park begins evacuating guests. Owen Grady's Velociraptor unit is brought into the response, but the hybrid's behavior makes it difficult to control. The confrontation draws the Tyrannosaurus rex into the fight, and the Mosasaurus ultimately pulls the Indominus into the lagoon.</p>
+                    <p>The incident ends the park's operation and shows the cost of making a creature more marketable without understanding its needs or planning for its behavior.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic World (2015)</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-fallen-kingdom">
+            <article class="news-story-article">
+                <span class="news-category">Evacuation report · Isla Nublar</span>
+                <h2 id="newsStoryDialogTitle">Fallen Kingdom: the island evacuation</h2>
+                <p class="news-story-lead">Mount Sibo's eruption turns a rescue mission into a contested decision about whether dinosaurs should be saved.</p>
+                <img class="news-story-photo-slot" src="evacuation-scene.webp" alt="Mount Sibo eruption on Isla Nublar" data-image-slot="volcano" loading="lazy">
+                <div class="news-story-body">
+                    <p>After Jurassic World has been abandoned, the dormant volcano Mount Sibo threatens the remaining dinosaurs on Isla Nublar. Claire Dearing joins a mission presented as a rescue effort. Owen Grady returns to the island to help locate Blue, the Velociraptor he raised at the park.</p>
+                    <p>The operation is secretly tied to the Lockwood estate and Eli Mills. The animals are transported to the mainland, where they are prepared for a private auction rather than release into a protected habitat. The discovery changes the mission from evacuation to an attempt to stop the sale.</p>
+                    <p>At the estate, the Indoraptor is presented as a weaponized hybrid, while the other captured dinosaurs are treated as commodities. The auction and the escape that follows expose how quickly the animals' fate can be decided by private interests.</p>
+                    <p>At the film's end, several dinosaurs are released beyond the estate. The story moves the franchise away from island containment and sets up the world in Dominion, where dinosaurs and people now share environments across the mainland.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic World: Fallen Kingdom (2018)</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-indoraptor">
+            <article class="news-story-article">
+                <span class="news-category">Genetics dossier · Lockwood estate</span>
+                <h2 id="newsStoryDialogTitle">Inside the Indoraptor program</h2>
+                <p class="news-story-lead">The private hybrid project in Fallen Kingdom pushes InGen's genetic experiments toward a new and dangerous purpose.</p>
+                <img class="news-story-photo-slot" src="indoraptor-scene.webp" alt="Indoraptor" data-image-slot="indoraptor" loading="lazy">
+                <div class="news-story-body">
+                    <p>The Indoraptor is introduced at the Lockwood estate during the dinosaur auction. Unlike the park animals bred as attractions, it is presented to buyers as a prototype with military applications. Its development is connected to the research that produced the Indominus rex and the work of Dr. Henry Wu.</p>
+                    <p>Wu warns that the prototype is incomplete, but the auction organizers focus on its potential rather than its reliability. The creature responds to a targeting system demonstrated during the sale, a feature that turns its enclosure into a stage for the buyers.</p>
+                    <p>Once loose inside the estate, the Indoraptor hunts through the building and proves difficult to control. The film's final confrontation ends with the animal falling from the estate's roof, while the auction operation collapses.</p>
+                    <p>The Indoraptor's short story is a cautionary extension of the franchise's hybrid theme: the problem is not only the genetics used to create an animal, but also the human purpose and lack of safeguards surrounding it.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic World: Fallen Kingdom (2018)</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-maisie-lockwood">
+            <article class="news-story-article">
+                <span class="news-category">Character dossier · Lockwood estate</span>
+                <h2 id="newsStoryDialogTitle">Who is Maisie Lockwood?</h2>
+                <p class="news-story-lead">Maisie's identity reveals that the franchise's cloning questions extend beyond dinosaurs.</p>
+                <img class="news-story-photo-slot" src="maisie-lockwood.jpg" alt="Maisie Lockwood" data-image-slot="maisie" loading="lazy">
+                <div class="news-story-body">
+                    <p>Maisie is introduced in Fallen Kingdom as the granddaughter of Benjamin Lockwood, living at his estate. As the dinosaur rescue mission reaches the estate, Maisie discovers that the adults around her have hidden the truth about her family and her origins.</p>
+                    <p>The revelation is that Maisie is a clone of Benjamin's daughter, Charlotte Lockwood. Charlotte made the decision to bring a genetic copy of herself into the world, and the film connects her research to the same technologies used in dinosaur cloning. Maisie is therefore not merely an observer of the dinosaur story; she is directly affected by it.</p>
+                    <p>In Dominion, Maisie's genetic history becomes important to the Biosyn investigation. Dr. Wu's work on her biology gives him insight into the genetic problem behind Biosyn's locusts and helps him pursue a solution.</p>
+                    <p>Maisie's arc asks whether a person created through cloning should be treated as a person with agency and rights. The films answer through her choices and relationships, not by treating her as a specimen in a laboratory.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic World: Fallen Kingdom · Jurassic World Dominion</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-owen-blue">
+            <article class="news-story-article">
+                <span class="news-category">Field profile · Raptor program</span>
+                <h2 id="newsStoryDialogTitle">Owen Grady and Blue</h2>
+                <p class="news-story-lead">Their relationship starts as a behavioral research project and becomes one of the franchise's recurring bonds.</p>
+                <img class="news-story-photo-slot" src="owen-blue.jpeg" alt="Owen Grady and Blue" data-image-slot="owen-blue" loading="lazy">
+                <div class="news-story-body">
+                    <p>Owen Grady works with a group of Velociraptors at Jurassic World. Rather than treating them as ordinary pets, he studies their behavior and uses carefully managed training sessions. Blue becomes the most responsive member of the group and the animal with whom Owen has the strongest connection.</p>
+                    <p>When the Indominus escapes, the park deploys the raptor unit to track it. The animals' behavior changes the operation, and Owen must respond to the fact that their training does not make them predictable machines. Blue survives the incident, but the park's breakdown separates her from Owen.</p>
+                    <p>Fallen Kingdom brings Owen back to Isla Nublar to rescue Blue as Mount Sibo erupts. After Blue is captured and taken to the mainland, she escapes the Lockwood estate and is released into the outside world.</p>
+                    <p>In Dominion, Blue is living in the wild and has a juvenile named Beta. When poachers capture Beta, Owen and Claire help bring her back. Their story links the original raptor program to the franchise's later questions about protecting dinosaurs outside the parks.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic World · Fallen Kingdom · Dominion</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-biosyn-locusts">
+            <article class="news-story-article">
+                <span class="news-category">Global investigation · Biosyn</span>
+                <h2 id="newsStoryDialogTitle">The locust crisis at Biosyn</h2>
+                <p class="news-story-lead">Dominion's central threat is not another escaped dinosaur, but a genetic experiment that affects food supplies around the world.</p>
+                <img class="news-story-photo-slot" src="locust-scene.webp" alt="Biosyn valley" data-image-slot="biosyn" loading="lazy">
+                <div class="news-story-body">
+                    <p>Biosyn Genetics presents itself as a company capable of studying and protecting dinosaurs. Its sanctuary in a secluded valley houses animals brought from across the world, and its leadership promotes the valley as a controlled environment for research.</p>
+                    <p>At the same time, enormous locusts begin destroying crops. The devastation appears selective: fields planted with Biosyn seed are spared while competing crops are consumed. Ellie Sattler investigates the pattern and reconnects with Alan Grant, leading them toward the company's research.</p>
+                    <p>Inside the valley, the investigation joins forces with Ian Malcolm, Maisie Lockwood, Owen Grady, and Claire Dearing. They discover that the locusts are connected to Biosyn's genetic work and that the company has attempted to conceal the danger.</p>
+                    <p>Dr. Henry Wu helps identify the genetic link and proposes a way to stop the outbreak. The story brings his career back to the consequences of genetic engineering, this time on a scale that threatens global agriculture rather than a single island park.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic World Dominion (2022)</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-claire-dearing">
+            <article class="news-story-article">
+                <span class="news-category">Character dossier · Dinosaur Protection Group</span>
+                <h2 id="newsStoryDialogTitle">Claire Dearing: from park manager to advocate</h2>
+                <p class="news-story-lead">Claire's role changes as the franchise moves from a functioning resort to a world where dinosaurs live beyond its gates.</p>
+                <img class="news-story-photo-slot" src="claire.jpg" alt="Claire Dearing" data-image-slot="claire" loading="lazy">
+                <div class="news-story-body">
+                    <p>Claire Dearing begins Jurassic World as the park's operations manager. She is responsible for schedules, guest experience, and the business decisions that keep the resort running. The Indominus crisis forces her to leave that role and take part directly in the effort to find her nephews and evacuate the island.</p>
+                    <p>By Fallen Kingdom, the park has been abandoned. Claire leads the Dinosaur Protection Group and campaigns for the animals left on Isla Nublar as Mount Sibo threatens them. The rescue mission she joins is compromised by the private auction planned at the Lockwood estate, and she eventually makes a decision that releases dinosaurs into the wider world.</p>
+                    <p>That choice has lasting consequences. In Dominion, Claire and Owen live in hiding while trying to protect Maisie and keep Beta safe from poachers. Claire's work is no longer about managing a visitor attraction; it is about helping people and animals survive in a changed ecosystem.</p>
+                    <p>Her character arc reflects the franchise's shift from corporate control of dinosaurs to the difficult question of how humans should coexist with them.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic World · Fallen Kingdom · Dominion</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-john-hammond">
+            <article class="news-story-article">
+                <span class="news-category">Founder profile · Jurassic Park</span>
+                <h2 id="newsStoryDialogTitle">John Hammond and the dream of a dinosaur park</h2>
+                <p class="news-story-lead">Hammond imagines a place where people can see living dinosaurs, but his story asks whether wonder can excuse inadequate preparation.</p>
+                <img class="news-story-photo-slot" src="john-hammond.avif" alt="John Hammond" data-image-slot="hammond" loading="lazy">
+                <div class="news-story-body">
+                    <p>John Hammond is the founder behind Jurassic Park on Isla Nublar. He works with InGen's scientists to turn genetic research into a public attraction and believes that visitors will be amazed by animals that have been absent from the world for millions of years. His enthusiasm shapes the park's presentation, from the arrival tour to the visitor center.</p>
+                    <p>Before opening, Hammond invites experts to inspect the park. Their tour reveals both the technical achievements and the risks: the animals are alive, unpredictable, and dependent on infrastructure and staff. Hammond's confidence in the park's systems does not account for every failure or for the people who may undermine them.</p>
+                    <p>After the disaster, Hammond is no longer simply the man welcoming guests. In The Lost World, he tries to prevent a new expedition from turning Isla Sorna into another commercial display. He asks Ian Malcolm to help document the animals before InGen's hunters can remove them.</p>
+                    <p>Across the films, Hammond's dream has two sides. He wants people to experience prehistoric life, yet the parks built around that dream repeatedly place animals and people in danger when business priorities outrun responsibility.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic Park · The Lost World: Jurassic Park</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-ian-malcolm">
+            <article class="news-story-article">
+                <span class="news-category">Expert profile · Chaos theory</span>
+                <h2 id="newsStoryDialogTitle">Dr. Ian Malcolm: the warning before the disaster</h2>
+                <p class="news-story-lead">Malcolm is invited to assess Jurassic Park and becomes a recurring witness to what happens when complex life is treated as a controllable product.</p>
+                <img class="news-story-photo-slot" src="ian-malcolm.jpg" alt="Dr. Ian Malcolm" data-image-slot="malcolm" loading="lazy">
+                <div class="news-story-body">
+                    <p>Ian Malcolm is a mathematician whose work includes chaos theory. Hammond brings him to Isla Nublar as one of the experts asked to evaluate the park before it opens. Malcolm doubts the idea that a living ecosystem can be made fully predictable by fences, computer systems, and commercial planning.</p>
+                    <p>When the park loses containment, Malcolm is injured during the Tyrannosaurus attack and must help the other visitors survive. His warnings are no longer abstract; he sees how the park's assurances fail under pressure and how quickly decisions made far from the paddocks become dangerous.</p>
+                    <p>In The Lost World, Malcolm returns to the dinosaur story because Sarah Harding is on Isla Sorna. He joins the effort to get her and the others off the island, and he faces another attempt to capture animals and transport them for public display.</p>
+                    <p>Years later, Dominion places Malcolm inside Biosyn's organization. His public role gives him access to the company, but he uses what he learns to help expose the locust crisis. Across the films, he remains a skeptical voice asking who benefits from an experiment and who bears the risk when it goes wrong.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic Park · The Lost World: Jurassic Park · Jurassic World Dominion</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-alan-grant">
+            <article class="news-story-article">
+                <span class="news-category">Expert profile · Paleontology</span>
+                <h2 id="newsStoryDialogTitle">Dr. Alan Grant's return to the islands</h2>
+                <p class="news-story-lead">Grant begins as a field paleontologist and is repeatedly drawn into encounters with living dinosaurs that challenge his expectations.</p>
+                <img class="news-story-photo-slot" src="allan-grant-comeback.webp" alt="Dr. Alan Grant" data-image-slot="grant" loading="lazy">
+                <div class="news-story-body">
+                    <p>Alan Grant is a paleontologist whose work is supported by Ellie Sattler. Hammond invites the pair to Isla Nublar, where Grant initially approaches the park as a scientific opportunity. Seeing living dinosaurs changes the scale of that experience, and the tour quickly becomes a struggle to get the children and other survivors to safety.</p>
+                    <p>Years later, Grant is working away from the islands when the Kirbys ask him to guide them over Isla Sorna. Their real purpose is to search for their missing son, Eric. Once the aircraft is forced down, Grant must help the group survive the island and find a way to contact rescuers.</p>
+                    <p>The Sorna expedition brings him face to face with the Spinosaurus and a landscape very different from Nublar's park. His practical knowledge of dinosaurs helps the group, but the films also show that observation cannot remove the danger of being among living predators.</p>
+                    <p>In Dominion, Grant reunites with Ellie and Ian to investigate the Biosyn locust outbreak. He follows evidence through the company's valley and helps the group uncover the connection between the modified insects and Biosyn's seed business.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic Park · Jurassic Park III · Jurassic World Dominion</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-ellie-sattler">
+            <article class="news-story-article">
+                <span class="news-category">Expert profile · Paleobotany</span>
+                <h2 id="newsStoryDialogTitle">Dr. Ellie Sattler follows the evidence</h2>
+                <p class="news-story-lead">Sattler's careful observations help uncover problems that the park's polished visitor experience leaves out of view.</p>
+                <img class="news-story-photo-slot" src="ellie-satler.avif" alt="Dr. Ellie Sattler" data-image-slot="sattler" loading="lazy">
+                <div class="news-story-body">
+                    <p>Ellie Sattler is a paleobotanist and field researcher. On Isla Nublar, she studies the plants growing alongside the cloned animals and notices signs that the park's carefully managed environment is not behaving as expected. Her scientific curiosity is paired with an ability to act when the tour becomes an emergency.</p>
+                    <p>When the power fails, Ellie helps restore the park's systems and later seeks help beyond the island. Her observations about plants and the surrounding habitat add another perspective to the inspection: the park is not only a collection of paddocks but a living system with consequences beyond its visitor routes.</p>
+                    <p>In Dominion, Ellie is no longer just revisiting an old disaster. She notices a pattern in the giant locust attacks and traces it to the crops spared by the insects. Her investigation brings Alan Grant and Ian Malcolm back into the story and leads the group toward Biosyn.</p>
+                    <p>Ellie's role links the franchise's scientific and environmental themes. She looks for evidence, asks how an organism fits into its surroundings, and does not accept a company's assurances when the facts point elsewhere.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic Park · Jurassic World Dominion</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-dennis-nedry">
+            <article class="news-story-article">
+                <span class="news-category">Incident file · Park systems</span>
+                <h2 id="newsStoryDialogTitle">Dennis Nedry and the stolen embryos</h2>
+                <p class="news-story-lead">A planned theft at the park's control center triggers the chain of failures that puts the visitors in danger.</p>
+                <img class="news-story-photo-slot" src="dennis-nerdy.jpeg" alt="Dennis Nedry" data-image-slot="nedry" loading="lazy">
+                <div class="news-story-body">
+                    <p>Dennis Nedry is Jurassic Park's computer programmer. He is responsible for important parts of the park's systems, but he is frustrated by his pay and the pressure placed on his work. A rival company offers him money to steal dinosaur embryos from the island's laboratory.</p>
+                    <p>To make the theft possible, Nedry disables security functions and takes a vehicle through the storm. The disruption affects the power supplied to multiple dinosaur enclosures. Nedry gets lost in the rain and encounters a Dilophosaurus; he does not return to the control room to restore the systems.</p>
+                    <p>His actions do not explain every weakness in the park, but they make the system's dependence on one compromised employee immediately visible. The staff have limited ability to recover because the park's technology and emergency plans are tied together.</p>
+                    <p>The stolen embryos are recovered after the incident, but the larger loss is the park itself. Nedry's attempted theft becomes a direct turning point in the film and a reminder that security depends on more than a working computer network.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic Park (1993)</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-robert-muldoon">
+            <article class="news-story-article">
+                <span class="news-category">Field profile · Park game warden</span>
+                <h2 id="newsStoryDialogTitle">Robert Muldoon knew the raptors were dangerous</h2>
+                <p class="news-story-lead">The game warden's practical experience gives him a clearer view of the Velociraptors than the park's containment plans do.</p>
+                <img class="news-story-photo-slot" src="robert-muldoon.webp" alt="Robert Muldoon" data-image-slot="muldoon" loading="lazy">
+                <div class="news-story-body">
+                    <p>Robert Muldoon is Jurassic Park's game warden and is responsible for understanding and managing dangerous animals. Before the visitor tour, he explains that the Velociraptors are intelligent, coordinated, and difficult to contain. His concerns are grounded in the animals' behavior rather than the park's marketing.</p>
+                    <p>When the systems fail, Muldoon joins the search for the escaped Tyrannosaurus and later goes after the raptors. He tries to use his field skills to protect the people still on the island, but the animals use the environment and teamwork to outmaneuver him.</p>
+                    <p>Muldoon's fate illustrates the difference between knowing an animal is dangerous and having the means to control the situation. Even an experienced handler cannot make an unpredictable encounter safe once the fences and communication systems are gone.</p>
+                    <p>His warnings are among the film's earliest signals that the park's largest risks are not theoretical. They are present from the beginning, even while the visitors are being reassured that everything is under control.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic Park (1993)</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-simon-masrani">
+            <article class="news-story-article">
+                <span class="news-category">Executive profile · Masrani Global</span>
+                <h2 id="newsStoryDialogTitle">Simon Masrani's Jurassic World</h2>
+                <p class="news-story-lead">Masrani reopens Hammond's vision as a successful resort, then faces the danger of keeping the park's next attraction commercially competitive.</p>
+                <img class="news-story-photo-slot" src="simon.jpg" alt="Simon Masrani" data-image-slot="masrani" loading="lazy">
+                <div class="news-story-body">
+                    <p>Simon Masrani is the head of Masrani Global and the owner of Jurassic World. He takes over the park project after John Hammond's death and builds a new resort on Isla Nublar. Masrani presents himself as a believer in Hammond's original dream, but Jurassic World is also a large business that must keep attracting visitors.</p>
+                    <p>As guests become familiar with the existing dinosaurs, the park develops the Indominus rex as a new headline attraction. Masrani is concerned about safety and visits the paddock after the animal's escape, but he enters the crisis in a helicopter rather than following the park's ground response.</p>
+                    <p>The helicopter is attacked by escaped Pteranodons and crashes near the aviary. Masrani dies during the attempt to respond to the outbreak. His loss is one of the consequences of a crisis that has spread far beyond a single enclosure.</p>
+                    <p>Masrani's story shows the tension between good intentions and responsibility. He wants a successful park and believes in its wonder, but his leadership does not prevent the risks created by its expanding attractions.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic World (2015)</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-vic-hoskins">
+            <article class="news-story-article">
+                <span class="news-category">Security briefing · InGen</span>
+                <h2 id="newsStoryDialogTitle">Vic Hoskins and the raptor weapon plan</h2>
+                <p class="news-story-lead">Hoskins sees military value in the raptor program, while the events of Jurassic World show how little control that plan actually provides.</p>
+                <img class="news-story-photo-slot" src="vic-hoskind.webp" alt="Vic Hoskins" data-image-slot="hoskins" loading="lazy">
+                <div class="news-story-body">
+                    <p>Vic Hoskins leads InGen Security and is interested in using Velociraptors for military operations. He argues that trained animals could track targets in environments where conventional equipment might fail. Owen Grady, who works closely with the raptors, objects that the animals are not obedient tools.</p>
+                    <p>The Indominus breakout gives Hoskins an opportunity to press his case. He orders the raptor unit into the field, expecting the animals to follow commands against the hybrid. Instead, the encounter exposes how fragile the plan is when the raptors recognize another animal and respond according to their own instincts.</p>
+                    <p>After the operation collapses, Hoskins tries to take control of the situation inside the laboratory. A Velociraptor attacks him before he can leave. His death comes as the park's carefully organized response is falling apart.</p>
+                    <p>The raptor plan is one of the film's clearest examples of treating animal behavior as predictable technology. The story places Hoskins' confidence beside Owen's experience and shows why a training relationship is not the same as remote control.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic World (2015)</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-scorpios-rex">
+            <article class="news-story-article">
+                <span class="news-category">Series incident · Camp Cretaceous</span>
+                <h2 id="newsStoryDialogTitle">E750: the Scorpios Rex outbreak</h2>
+                <p class="news-story-lead">The campers discover an abandoned hybrid experiment beneath Isla Nublar, created before the Indominus project.</p>
+                <img class="news-story-photo-slot" src="scorpis-rex-breakout.jpg" alt="Scorpios rex, experiment E750" data-image-slot="scorpios" loading="lazy">
+                <div class="news-story-body">
+                    <p>In Camp Cretaceous, the Scorpios Rex is introduced as E750, a hybrid created in an earlier InGen experiment. Dr. Wu's records show that the creature was considered too unstable to continue as a public project and was kept hidden in a cryogenic facility on Isla Nublar.</p>
+                    <p>The campers discover the facility after the main park has already fallen into chaos. When the Scorpios Rex escapes, the group must navigate a new threat while trying to find shelter and a way off the island. The incident reveals that the Indominus was not the first attempt to combine dinosaur DNA into a new hybrid.</p>
+                    <p>The series depicts the Scorpios as unusually aggressive and difficult to predict. Its presence disrupts the island's other animals as well as the campers' plans, and the group has to coordinate rather than confront it directly.</p>
+                    <p>E750 expands the franchise's account of InGen's research history. The hidden file shows that experiments could be abandoned without the risks disappearing, leaving dangerous consequences for the people and animals still on the island.</p>
+                </div>
+                <p class="news-source">Series record: Jurassic World: Camp Cretaceous</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-camp-cretaceous">
+            <article class="news-story-article">
+                <span class="news-category">Survival report · Isla Nublar</span>
+                <h2 id="newsStoryDialogTitle">Six campers stranded during the park's collapse</h2>
+                <p class="news-story-lead">A group of teenagers arrives for an exclusive camp experience just as Jurassic World stops being a safe place for visitors.</p>
+                <img class="news-story-photo-slot" src="camp-creataceous-kids.avif" alt="The six Camp Cretaceous campers" data-image-slot="camp" loading="lazy">
+                <div class="news-story-body">
+                    <p>Darius, Brooklynn, Kenji, Yaz, Sammy, and Ben are selected to attend Camp Cretaceous on Isla Nublar. The camp is designed to let its guests see dinosaurs from close range while the main park operates elsewhere on the island.</p>
+                    <p>When the events of Jurassic World unfold, the campers are cut off from the adults and transport routes that were supposed to keep them safe. They move between camp areas, park facilities, and the island's wilderness while trying to reconnect with their families.</p>
+                    <p>The group does not respond to the crisis in the same way. Darius' knowledge of dinosaurs, Brooklynn's curiosity, Kenji's confidence, Yaz's athleticism, Sammy's loyalty, and Ben's changing courage all affect how they survive together.</p>
+                    <p>Across the series, their journey expands beyond the first park emergency into later discoveries and new threats. Camp Cretaceous gives the franchise a youth-survival perspective while keeping the campers' story tied to the larger events on Isla Nublar.</p>
+                </div>
+                <p class="news-source">Series record: Jurassic World: Camp Cretaceous</p>
+            </article>
+        </template>
+
+        <!-- Mendefinisikan markup artikel yang dapat disalin saat dibutuhkan. -->
+        <template id="news-story-rebirth-expedition">
+            <article class="news-story-article">
+                <span class="news-category">Expedition briefing · 5 years after Dominion</span>
+                <h2 id="newsStoryDialogTitle">Rebirth: mission to the forbidden island</h2>
+                <p class="news-story-lead">Years after dinosaurs spread into the modern world, a new expedition travels to an isolated equatorial island for a medical research mission.</p>
+                <img class="news-story-photo-slot" src="rebirth.avif" alt="Jurassic World Rebirth expedition" data-image-slot="rebirth" loading="lazy">
+                <div class="news-story-body">
+                    <p>Jurassic World Rebirth takes place five years after Dominion. Dinosaurs have struggled to thrive in most of the modern world, while some of the largest surviving animals remain in isolated equatorial regions. The film follows a team sent to one such island, a place with its own dangers and a history that has not been fully disclosed.</p>
+                    <p>Zora Bennett leads the operation, joined by Duncan Kincaid and paleontologist Dr. Henry Loomis. Their assignment is to obtain genetic material from three enormous prehistoric species. The samples may contribute to medical research, giving the expedition a goal that reaches beyond capturing animals for public display.</p>
+                    <p>The team encounters the Delgado family, whose boat has been attacked and whose members are stranded. The two groups must work together as they cross the island and face animals they were not prepared to meet. The expedition's carefully planned route gives way to decisions about who to protect and whether the mission should continue.</p>
+                    <p>Rebirth returns the franchise to an isolated island setting while shifting the question from building a dinosaur park to deciding how human research should interact with surviving prehistoric life. The mission's value does not remove the risks to the people or animals involved.</p>
+                </div>
+                <p class="news-source">Film record: Jurassic World Rebirth (2025)</p>
+            </article>
+        </template>
+
+        <!-- Profil detail menampilkan metrik, riwayat, containment, DNA, FAQ, dan media specimen. -->
+        <!-- Membuka bagian konten  untuk detail-view. -->
+        <section id="view-detail" class="detail-view">
+            <!-- Menyediakan tombol untuk aksi pengguna untuk back-btn. -->
+            <button class="back-btn" onclick="switchView('encyclopedia')">
+                <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5m7 7l-7-7 7-7"/></svg>
+                Back to Directory
+            </button>
+
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk detail-header. -->
+            <div class="detail-header">
+                <!-- Menampilkan judul bagian atau artikel dengan ID detailName. -->
+                <h2 id="detailName">Tyrannosaurus rex</h2>
+                <!-- Menampilkan paragraf keterangan dengan ID detailSub. -->
+                <p id="detailSub">Tyrannosauridae • Cretaceous</p>
+            </div>
+
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk detail-grid. -->
+            <div class="detail-grid">
+                <!-- Panel kiri untuk ukuran tubuh dan klasifikasi specimen. -->
+                <!-- Membuka panel informasi samping untuk detail-sidebar. -->
+                <aside class="detail-sidebar">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk detail-panel. -->
+                    <div class="detail-panel">
+                        <!-- Menampilkan subjudul bagian. -->
+                        <h3>Biometrics</h3>
+                        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk spec-row. -->
+                        <div class="spec-row">
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-label. -->
+                            <span class="spec-label">Length</span>
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-value. -->
+                            <span class="spec-value" id="specLength">12.3 M</span>
+                        </div>
+                        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk spec-row. -->
+                        <div class="spec-row">
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-label. -->
+                            <span class="spec-label">Height</span>
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-value. -->
+                            <span class="spec-value" id="specHeight">4.6 M</span>
+                        </div>
+                        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk spec-row. -->
+                        <div class="spec-row">
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-label. -->
+                            <span class="spec-label">Weight</span>
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-value. -->
+                            <span class="spec-value" id="specWeight">8,000 KG</span>
+                        </div>
+                    </div>
+
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk detail-panel. -->
+                    <div class="detail-panel">
+                        <!-- Menampilkan subjudul bagian. -->
+                        <h3>Information</h3>
+                        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk spec-row. -->
+                        <div class="spec-row">
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-label. -->
+                            <span class="spec-label">Family</span>
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-value. -->
+                            <span class="spec-value" id="specFamily">Tyrannosauridae</span>
+                        </div>
+                        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk spec-row. -->
+                        <div class="spec-row">
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-label. -->
+                            <span class="spec-label">Genus</span>
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-value. -->
+                            <span class="spec-value" id="specGenus">Tyrannosaurus</span>
+                        </div>
+                        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk spec-row. -->
+                        <div class="spec-row">
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-label. -->
+                            <span class="spec-label">Diet</span>
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-value. -->
+                            <span class="spec-value" id="specDiet">Carnivore</span>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Panel tengah menampilkan foto specimen dan navigasi ke profil lain. -->
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk main-specimen-display. -->
+                <div class="main-specimen-display">
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk specimen-image-box. -->
+                    <div class="specimen-image-box">
+                        <!-- Menampilkan gambar  dengan ID detailImg. -->
+                        <img id="detailImg" src="home-slide-1.png" alt="Tyrannosaurus rex">
+                        <!-- Menyediakan tombol untuk aksi pengguna untuk specimen-navigation-button specimen-navigation-previous. -->
+                        <button type="button" class="specimen-navigation-button specimen-navigation-previous" onclick="navigateSpecimen(-1)" aria-label="Previous dinosaur" title="Previous dinosaur">
+                            <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+                        </button>
+                        <!-- Menyediakan tombol untuk aksi pengguna untuk specimen-navigation-button specimen-navigation-next. -->
+                        <button type="button" class="specimen-navigation-button specimen-navigation-next" onclick="navigateSpecimen(1)" aria-label="Next dinosaur" title="Next dinosaur">
+                            <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+                        </button>
+                        <!-- Menyediakan tautan menuju bagian atau alamat terkait untuk dino-scroll-cue detail-scroll-cue. -->
+                        <a class="dino-scroll-cue detail-scroll-cue" href="#detailVideoPanel">
+                            Scroll down
+                            <!-- Menampilkan teks inline atau label antarmuka untuk scroll-cue-arrow. -->
+                            <span class="scroll-cue-arrow" aria-hidden="true">
+                                <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                                <svg class="scroll-cue-arrow-current" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14m-7-7 7 7 7-7"/></svg>
+                                <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                                <svg class="scroll-cue-arrow-next" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14m-7-7 7 7 7-7"/></svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Panel kanan merangkum era, sumber, lokasi, dan perkiraan risiko. -->
+                <!-- Membuka panel informasi samping untuk detail-sidebar record-sidebar. -->
+                <aside class="detail-sidebar record-sidebar">
+                    <!-- Membuka bagian konten  untuk detail-panel archive-panel. -->
+                    <section class="detail-panel archive-panel">
+                        <!-- Menampilkan subjudul bagian. -->
+                        <h3>Specimen Record</h3>
+                        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk spec-row. -->
+                        <div class="spec-row">
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-label. -->
+                            <span class="spec-label">Era</span>
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-value. -->
+                            <span class="spec-value" id="specEra">Late Cretaceous</span>
+                        </div>
+                        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk spec-row. -->
+                        <div class="spec-row">
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-label. -->
+                            <span class="spec-label">Archive Source</span>
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-value. -->
+                            <span class="spec-value" id="specMovie">Jurassic Park</span>
+                        </div>
+                        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk spec-row. -->
+                        <div class="spec-row">
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-label. -->
+                            <span class="spec-label">Location</span>
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-value. -->
+                            <span class="spec-value" id="specPrimaryLocation">Isla Nublar (based on Jurassic Park)</span>
+                        </div>
+                        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk spec-row. -->
+                        <div class="spec-row">
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-label. -->
+                            <span class="spec-label">Estimated Risk</span>
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-value spec-status risk-level-moderate. -->
+                            <span id="specRiskLevel" class="spec-value spec-status risk-level-moderate" title="Estimated from size, diet, defenses, and hybrid behavior; not an official game rating.">Moderate</span>
+                        </div>
+                        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk spec-row. -->
+                        <div class="spec-row">
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-label. -->
+                            <span class="spec-label">Last Survey</span>
+                            <!-- Menampilkan teks inline atau label antarmuka untuk spec-value. -->
+                            <span class="spec-value">Field Log 001</span>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+
+            <!-- Panel video memakai berkas lokal, embed YouTube, atau petunjuk pengganti. -->
+            <!-- Membuka bagian konten  untuk detail-panel detail-video-panel. -->
+            <section id="detailVideoPanel" class="detail-panel detail-video-panel">
+                <!-- Menampilkan subjudul bagian. -->
+                <h3>Specimen Video</h3>
+                <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk specimen-video-slot. -->
+                <div class="specimen-video-slot">
+                    <!-- Menyediakan elemen pemutar video lokal. -->
+                    <video id="detailVideo" controls playsinline preload="metadata" hidden></video>
+                    <!-- Menyediakan bingkai untuk konten video embed. -->
+                    <iframe id="detailVideoEmbed" title="Specimen video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen hidden></iframe>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk specimen-video-placeholder. -->
+                    <div id="videoPlaceholder" class="specimen-video-placeholder">
+                        <!-- Menampilkan teks inline atau label antarmuka untuk specimen-video-play. -->
+                        <span class="specimen-video-play" aria-hidden="true">
+                            <!-- Membuka ikon vektor yang ditampilkan sebagai bagian antarmuka. -->
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        </span>
+                        <!-- Menandai teks penting dengan penekanan semantik. -->
+                        <strong><span id="videoPlaceholderName">Tyrannosaurus rex</span> video slot</strong>
+                        <!-- Menampilkan teks inline atau label antarmuka untuk video-slot-hint. -->
+                        <span class="video-slot-hint">Set an HTTPS MP4/WebM or YouTube watch/share URL in <code>specimenVideoFiles</code> in script.js. YouTube embeds need localhost or HTTPS hosting.</span>
+                    </div>
+                </div>
+                <!-- Menyediakan tautan menuju bagian atau alamat terkait untuk specimen-video-external-link. -->
+                <a id="detailVideoExternalLink" class="specimen-video-external-link" target="_blank" rel="noopener noreferrer" hidden>Open video on YouTube</a>
+            </section>
+
+            <!-- Panel informasi tambahan diisi ulang untuk specimen yang sedang dibuka. -->
+            <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk detail-extra-grid. -->
+            <div class="detail-extra-grid">
+                <!-- Membuka bagian konten  untuk detail-panel containment-timeline-panel. -->
+                <section class="detail-panel containment-timeline-panel">
+                    <!-- Menampilkan subjudul bagian. -->
+                    <h3>Franchise Location &amp; Containment Timeline</h3>
+                    <!-- Menampilkan paragraf keterangan untuk containment-timeline-note. -->
+                    <p class="containment-timeline-note">Shows the location and site-wide situation in each recorded film, series, or game. Individual animals may have different outcomes; see Species History for their story.</p>
+                    <!-- Membuka daftar berurutan untuk riwayat atau langkah. -->
+                    <ol id="containmentTimeline" class="containment-timeline"></ol>
+                </section>
+                <!-- Membuka bagian konten  untuk detail-panel species-history-panel. -->
+                <section class="detail-panel species-history-panel">
+                    <!-- Menampilkan subjudul bagian. -->
+                    <h3>Species History</h3>
+                    <!-- Menampilkan paragraf keterangan untuk dino-history. -->
+                    <p id="dinoHistory" class="dino-history"></p>
+                </section>
+                <!-- Membuka bagian konten  untuk detail-panel archival-record-panel. -->
+                <section class="detail-panel archival-record-panel">
+                    <!-- Menampilkan subjudul bagian. -->
+                    <h3>Archival Record</h3>
+                    <!-- Menampilkan judul kartu atau panel dengan ID detailTitle. -->
+                    <h4 id="detailTitle">Apex Predator of Isla Nublar</h4>
+                    <!-- Menampilkan paragraf keterangan dengan ID detailDesc. -->
+                    <p id="detailDesc">Description text goes here...</p>
+                </section>
+                <!-- Membuka bagian konten  untuk detail-panel dna-splicing-panel. -->
+                <section id="dnaSplicingPanel" class="detail-panel dna-splicing-panel" hidden>
+                    <!-- Menampilkan teks inline atau label antarmuka untuk dna-record-label. -->
+                    <span class="dna-record-label">Genetic Archive</span>
+                    <!-- Menampilkan subjudul bagian. -->
+                    <h3>DNA Splicing Data</h3>
+                    <!-- Menampilkan paragraf keterangan untuk dna-splicing-note. -->
+                    <p id="dnaSplicingNote" class="dna-splicing-note"></p>
+                    <!-- Membuka daftar tanpa urutan untuk navigasi atau data. -->
+                    <ul id="dnaComponentList" class="dna-component-list"></ul>
+                </section>
+                <!-- Membuka bagian konten  untuk detail-panel species-faq-panel. -->
+                <section class="detail-panel species-faq-panel">
+                    <!-- Menampilkan subjudul bagian. -->
+                    <h3>Frequently Asked Questions</h3>
+                    <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk dino-faq-list. -->
+                    <div id="dinoFaqList" class="dino-faq-list"></div>
+                </section>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer berisi kredit arsip dan tautan media sosial. -->
+    <!-- Membuka bagian penutup halaman dan tautan pendukung. -->
+    <footer>
+        <!-- Membuka wadah untuk mengelompokkan elemen antarmuka untuk footer-container. -->
+        <div class="footer-container">
+            <!-- Menampilkan paragraf keterangan. -->
+            <p>&copy; 2026 InGen Biological Archive &middot; Jurassic Codex Division</p>
+            <!-- Membuka daftar tanpa urutan untuk navigasi atau data. -->
+            <ul class="footer-links">
+                <!-- Menambahkan satu butir ke daftar. -->
+                <li><a href="https://www.instagram.com/andaegeunyusufpratama/" target="_blank" rel="noopener noreferrer">Instagram: @andaegeunyusufpratama</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Data dimuat lebih dulu agar tersedia saat logika antarmuka dijalankan. -->
+    <!-- Memuat atau menjalankan JavaScript untuk interaksi halaman. -->
+    <script src="data.js"></script>
+    <!-- Memuat atau menjalankan JavaScript untuk interaksi halaman. -->
+    <script src="script.js"></script>
+</body>
+</html>
