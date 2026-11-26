@@ -697,8 +697,6 @@ const specimenVideoFiles = {
     // Menjalankan langkah proses untuk memperbarui data atau antarmuka.
     "stygimoloch": "https://www.youtube.com/watch?v=qo84nLHYwMY&list=PLCbOivu5Z0VaMmROUaf5HcAZLQU94t7Xf&index=28",
     // Menjalankan langkah proses untuk memperbarui data atau antarmuka.
-    "giganotosaurus": "https://www.youtube.com/results?search_query=Giganotosaurus",
-    // Menjalankan langkah proses untuk memperbarui data atau antarmuka.
     "pyroraptor": "https://www.youtube.com/watch?v=AJXxjzBw5x0",
     // Menjalankan langkah proses untuk memperbarui data atau antarmuka.
     "therizinosaurus": "https://www.youtube.com/watch?v=3UCNT7voFJI",
@@ -746,6 +744,8 @@ const specimenVideoFiles = {
 // Daftar specimen yang tidak menampilkan panel video.
 // Menyimpan nilai yang diperlukan pada variabel specimensWithoutVideo.
 const specimensWithoutVideo = new Set([
+    // Menjalankan langkah proses untuk memperbarui data atau antarmuka.
+    "giganotosaurus",
     // Menjalankan langkah proses untuk memperbarui data atau antarmuka.
     "dreadnoughtus",
     // Menjalankan langkah proses untuk memperbarui data atau antarmuka.
